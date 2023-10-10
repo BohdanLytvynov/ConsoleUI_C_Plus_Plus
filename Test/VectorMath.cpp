@@ -17,7 +17,9 @@ Point2D::Point2D(const Point2D& other)
 	//Init logic for the current class
 }
 
-Point2D::Point2D(UShort x, UShort y) : ConsoleCoords(x, y) {}
+Point2D::Point2D(const UShort x, const UShort y) : ConsoleCoords(x, y) {}
+
+
 
 #pragma endregion
 
@@ -62,7 +64,10 @@ void Point2D::SetXY(UShort x, UShort y)
 
 #pragma region Nath
 
-
+Vector2D Point2D::operator-(const Point2D& start)const
+{
+	return Vector2D(start,*this);
+}
 
 #pragma endregion
 
@@ -83,22 +88,16 @@ void Point2D::SetXY(UShort x, UShort y)
 
 Vector2D::Vector2D() : ConsoleCoords() 
 {
-	m_start = Point2D(0,0);
-
-	m_end = Point2D(0, 0);
+	
 }
 
-Vector2D::Vector2D(Point2D& start, Point2D& end) :  m_start(start), m_end(end)
+Vector2D::Vector2D(const Point2D& start, const  Point2D& end)
 {
 	ReCalcVectorCoords(start, end);
 }
 
 Vector2D::Vector2D(const Vector2D& other)
-{
-	m_start = other.GetStart();
-
-	m_end = other.GetEnd();
-
+{	
 	SetXY(other.GetX(), other.GetY());
 }
 
@@ -108,10 +107,7 @@ Vector2D::Vector2D(const Vector2D& other)
 
 #pragma region Private Functions
 
-void Vector2D::SetXY(UShort x, UShort y)
-{
-	ConsoleCoords::SetXY(x, y);
-}
+
 
 void Vector2D::ReCalcVectorCoords(const Point2D& start, const Point2D& end)
 {
@@ -121,16 +117,6 @@ void Vector2D::ReCalcVectorCoords(const Point2D& start, const Point2D& end)
 #pragma endregion
 
 #pragma region Getters
-
-Point2D Vector2D::GetStart() const
-{
-	return m_start;
-}
-
-Point2D Vector2D::GetEnd() const
-{
-	return m_end;
-}
 
 UShort Vector2D::GetX() const
 {
@@ -146,28 +132,24 @@ UShort Vector2D::GetY() const
 
 #pragma region Setters
 
-void Vector2D::SetStart(Point2D start)
+void Vector2D::SetXY(UShort x, UShort y)
 {
-	m_start = start;
-
-	ReCalcVectorCoords(m_start, m_end);
+	ConsoleCoords::SetXY(x, y);
 }
 
-void Vector2D::SetEnd(Point2D end)
+void Vector2D::SetX(UShort x)
 {
-	m_end - end;
-
-	ReCalcVectorCoords(m_start, m_end);
+ConsoleCoords:: SetX(x);
 }
 
-
-void Vector2D::SetStartEnd(Point2D start, Point2D end)
+void Vector2D::SetY(UShort y)
 {
-	m_start = start;
+	ConsoleCoords::SetY(y);
+}
 
-	m_end = end;
-
-	ReCalcVectorCoords(m_start, m_end);
+UShort Vector2D::GetLength()const
+{
+	return static_cast<UShort>(sqrtf(GetX() * GetX() + GetY() * GetY()));
 }
 
 #pragma endregion

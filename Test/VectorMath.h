@@ -3,6 +3,9 @@
 #define VECTORMATH_H
 
 #include"Base.h"
+#include<cmath>
+class Vector2D;
+
 //Derivate form ConsoleCoords base class
 class Point2D : public ConsoleCoords
 {
@@ -20,14 +23,14 @@ public:
 	/// </summary>
 	/// <param name="x">X coord</param>
 	/// <param name="y">Y coord</param>
-	Point2D(UShort x, UShort y);
+	Point2D(const UShort x, const UShort y);
 
 	/// <summary>
 	/// Copy ctor
 	/// </summary>
 	/// <param name="other"></param>
 	Point2D(const Point2D& other);
-		
+			
 #pragma endregion
 
 #pragma region Getters
@@ -72,19 +75,33 @@ public:
 
 #pragma region Math
 
-	Point2D operator - (const Point2D& other);
+	Vector2D operator - (const Point2D& other)const;
 
 	Point2D operator + (const Point2D& other);
 
 #pragma endregion
 
-	
-#pragma region Casting
+#pragma region Input Output
 
-	//operator ConsoleCoords ();
+	friend std::istream& operator >> (std::istream& is, Point2D& p)
+	{
+		ConsoleCoords c;
+
+		is >> c;
+
+		p.SetXY(c.GetX(), c.GetY());
+
+		return is;
+	}
+
+	friend std::ostream& operator << (std::ostream& os, Point2D& p)
+	{
+		os << "X: " << p.GetX() << std::endl << "Y: " << p.GetY() << std::endl;
+
+		return os;
+	}
 
 #pragma endregion
-
 
 #pragma endregion
 
@@ -96,22 +113,14 @@ public:
 class Vector2D : public ConsoleCoords
 {
 private:
-	
-	//Start point
-	Point2D m_start;
-
-	//End point
-	Point2D m_end;
-
+		
 	void ReCalcVectorCoords(const Point2D &start, const Point2D &end);
-
-	void SetXY(UShort x, UShort y);
-
+	
 public:
 #pragma region Ctor
 
 	/// <summary>
-	/// Empty standart ctro
+	/// Empty standart ctor
 	/// </summary>
 	Vector2D();
 	
@@ -120,7 +129,7 @@ public:
 	/// </summary>
 	/// <param name="start">Start Point</param>
 	/// <param name="end">End Point</param>
-	Vector2D(Point2D &start, Point2D& end);
+	Vector2D(const Point2D &start, const Point2D& end);
 
 	/// <summary>
 	/// Copy Ctor
@@ -133,17 +142,7 @@ public:
 #pragma region Methods
 
 #pragma region Getters
-	/// <summary>
-	/// Get Start point of the vector
-	/// </summary>
-	/// <returns>Start point</returns>
-	Point2D GetStart() const;
 	
-	/// <summary>
-	/// Get the endpoint of the vector
-	/// </summary>
-	/// <returns>End point</returns>
-	Point2D GetEnd()const;
 
 	/// <summary>
 	/// Gets the X coord of the Vector
@@ -156,32 +155,35 @@ public:
 	/// </summary>
 	/// <returns>Y coord</returns>
 	UShort GetY() const;
-
+		
 #pragma endregion
 
 #pragma region Setters
 
 	/// <summary>
-	/// Sets new start point, recalculate vector coords
+	/// Set X and Y coord of the Vector
 	/// </summary>
-	/// <param name="start"></param>
-	void SetStart(Point2D start);
+	/// <param name="x">New X coord</param>
+	/// <param name="y">New Y coord</param>
+	void SetXY(UShort x, UShort y);
 
 	/// <summary>
-	/// Sets new end point, recalculates vector coords
+	/// Set X coord of the Vector
 	/// </summary>
-	/// <param name="end"></param>
-	void SetEnd(Point2D end);
+	/// <param name="x">new X coord</param>
+	void SetX(UShort x);
 
 	/// <summary>
-	/// Sets new start and end ppoints, recalculate vector coords
+	/// Set Y coord of the Vector
 	/// </summary>
-	/// <param name="start"></param>
-	/// <param name="end"></param>
-	void SetStartEnd(Point2D start, Point2D end);
+	/// <param name="y">New Y coord</param>
+	void SetY(UShort y);
 
 #pragma endregion
-
+/// <summary>
+/// Get Vector Length
+/// </summary>
+/// <returns></returns>
 UShort GetLength() const;
 
 

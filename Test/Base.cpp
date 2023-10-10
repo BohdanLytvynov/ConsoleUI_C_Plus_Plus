@@ -1,5 +1,13 @@
 #include"Base.h"
 
+#pragma region Init Static Fields
+
+unsigned char ConsoleCoords::m_DIMENSIONS = 2;
+
+std::string ConsoleCoords::m_InputMsg = "Enter Coordinate ";
+
+#pragma endregion
+
 #pragma region Definition of the functions
 
 #pragma region Ctors
@@ -13,6 +21,38 @@ ConsoleCoords::ConsoleCoords(const ConsoleCoords& other) : m_x(other.m_x), m_y(o
 #pragma endregion
 
 #pragma region Functions
+
+bool ConsoleCoords::isNumber(const std::string& str, std::string& error, UShort &number)
+{	
+	if (str.empty())
+	{
+		error = "You have input empty string1";
+		return false;
+	}
+
+	for (char c : str)
+	{
+		if (!isdigit(c))
+		{
+			error = "Input is not a digit!";
+
+			return false;
+		}
+	}
+
+	try
+	{
+		number = static_cast<UShort>(stoi(str));
+	}
+	catch (const std::exception&)
+	{
+		error = "Wrong input format. Can't cast to unsigned short!!!";
+
+		return false;
+	}
+
+	return true;
+}
 
 #pragma region Get Set X
 

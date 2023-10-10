@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <string>
 #include<vector>
+#include"VectorMath.h"
 
 using namespace std;
 #pragma region Func Pointers
@@ -165,14 +166,20 @@ int main()
             BACKGROUND_BLUE
             );*/
            
-        vector<unsigned short> relTxtPos = {5,10};
+        /*vector<unsigned short> relTxtPos = {5,10};
 
         DrawTextBlock(10, 5, 20,20, (BACKGROUND_RED | BACKGROUND_GREEN) |
             (FOREGROUND_BLUE),
             BACKGROUND_BLUE, "Some frase for testing Some frase for testing Some frase for testing",
             0 | (FOREGROUND_RED | FOREGROUND_GREEN |
                 FOREGROUND_BLUE | FOREGROUND_INTENSITY), 
-            relTxtPos, true);
+            relTxtPos, true);*/
+
+        Point2D p1;
+
+        cin >> p1;
+
+        cout << p1;
 
         system("Pause");
 

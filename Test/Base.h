@@ -2,6 +2,9 @@
 
 #define BASE_H
 
+#include<iostream>
+#include <string>
+
 #pragma region Typedef
 
 typedef unsigned short UShort;
@@ -17,7 +20,19 @@ private:
 
 	UShort m_y;//Position of thr object with respect to Y axis
 
+	static unsigned char m_DIMENSIONS;
+
+	static std::string m_InputMsg;
+
+protected:
+	/// <summary>
+	/// Trys to parse string to number UShort
+	/// </summary>
+	static bool isNumber(const std::string& str, std::string& error, UShort &number);
+
 public:
+	
+
 	//Public section of the class
 #pragma region Ctor
 	/// <summary>
@@ -82,10 +97,45 @@ public:
 	/// <returns>ref to current object</returns>
 	ConsoleCoords &operator = (const ConsoleCoords& cc);
 
+	friend std::istream& operator >> (std::istream& is, ConsoleCoords& c)
+	{
+		std::string str;
+		std::string error;	
+
+		UShort temp;
+
+		for (int i = 1; i <= m_DIMENSIONS; ++i)
+		{
+			do
+			{
+				if (error.size() > 0)
+					std::cout << error << std::endl;
+
+				std::cout << m_InputMsg << ((i == 1)? "X" : "Y") << std::endl;
+
+				is >> str;
+
+			} while (!isNumber(str, error, temp));
+
+			error.clear();
+
+			i == 1 ? c.m_x = temp :
+				c.m_y = temp;
+		}
+		
+		return is;
+	}
+
+	friend std::ostream& operator << (std::ostream& os, ConsoleCoords& c)
+	{
+		os << "X: " << c.m_x << std::endl << "Y: " << c.m_y << std::endl;
+
+		return os;
+	}
+
 #pragma endregion
 
 };
-
 
 #endif // !BASE_H
 
