@@ -36,7 +36,7 @@ public:
 	/// Copy ctor
 	/// </summary>
 	/// <param name="other">Object to copy values from</param>
-	ConsoleCoords(ConsoleCoords& other);
+	ConsoleCoords(const ConsoleCoords& other);
 
 #pragma endregion
 

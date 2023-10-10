@@ -8,7 +8,7 @@ ConsoleCoords::ConsoleCoords() : m_x(0), m_y(0) {}
 
 ConsoleCoords::ConsoleCoords(UShort x, UShort y) : m_x(x), m_y(y) {}
 
-ConsoleCoords::ConsoleCoords(ConsoleCoords& other) : m_x(other.m_x), m_y(other.m_y) {}
+ConsoleCoords::ConsoleCoords(const ConsoleCoords& other) : m_x(other.m_x), m_y(other.m_y) {}
 
 #pragma endregion
 
