@@ -96,11 +96,13 @@ public:
 	/// <param name="cc">ConsoleCoords Object</param>
 	/// <returns>ref to current object</returns>
 	ConsoleCoords &operator = (const ConsoleCoords& cc);
+	
+#pragma region Input Output
 
 	friend std::istream& operator >> (std::istream& is, ConsoleCoords& c)
 	{
 		std::string str;
-		std::string error;	
+		std::string error;
 
 		UShort temp;
 
@@ -111,7 +113,7 @@ public:
 				if (error.size() > 0)
 					std::cout << error << std::endl;
 
-				std::cout << m_InputMsg << ((i == 1)? "X" : "Y") << std::endl;
+				std::cout << m_InputMsg << ((i == 1) ? "X" : "Y") << std::endl;
 
 				is >> str;
 
@@ -122,7 +124,7 @@ public:
 			i == 1 ? c.m_x = temp :
 				c.m_y = temp;
 		}
-		
+
 		return is;
 	}
 
@@ -132,6 +134,11 @@ public:
 
 		return os;
 	}
+
+#pragma endregion
+
+
+	
 
 #pragma endregion
 

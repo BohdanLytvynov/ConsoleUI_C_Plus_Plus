@@ -7,6 +7,8 @@
 #include<vector>
 #include"VectorMath.h"
 
+using namespace VectorMath;
+
 using namespace std;
 #pragma region Func Pointers
 
@@ -175,11 +177,48 @@ int main()
                 FOREGROUND_BLUE | FOREGROUND_INTENSITY), 
             relTxtPos, true);*/
 
-        Point2D p1;
 
-        cin >> p1;
+        Point2D p1(3, 3);
 
-        cout << p1;
+        Point2D p2(1,1);
+
+        Point2D p3(4, 4);
+
+        Point2D p4(1, 1);
+        
+        Vector2D v1 = p1 - p2;
+
+        Vector2D v2 = p3 - p4;
+
+        Vector2D increment(1, 1);
+
+        Vector2D v5(6,6);
+
+        cout << v1;
+
+        cout << v2;
+
+        cout << "DotProduct: " << v1.DotProduct(v2) << " Operator *: " << v1 * v2 << endl;
+
+        cout << "Vector Length: " << v1.GetLength() << endl;
+
+        Vector2D vres = v1 + v2;
+
+        cout << "v1 + v2: " << vres << endl;
+
+        vres = v2 - v1;
+
+        cout << "v2 - v1: " << vres << endl;
+
+        cout << v5;
+
+        v5 += increment;
+
+        cout << "V5 += increment: " << v5 << endl;
+
+        v5 -= increment;
+
+        cout << "V5 -= increment: " << v5 << endl;
 
         system("Pause");
 

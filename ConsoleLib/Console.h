@@ -29,17 +29,17 @@ namespace ConsoleFuncs
 {
 #pragma region Dll internal state
 
-	WORD m_DefaultColor;
+	extern WORD m_DefaultColor;
 
-	HANDLE m_console;
+	extern HANDLE m_console;
 
-	short m_x;
+	extern short m_x;
 
-	short m_y;
+	extern short m_y;
 
-	int m_height;
+	extern int m_height;
 
-	int m_width;
+	extern int m_width;
 
 #pragma endregion
 
